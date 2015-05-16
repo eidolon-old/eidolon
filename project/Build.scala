@@ -1,5 +1,5 @@
 /**
- * This file is part of the Eidolon project.
+ * This file is part of the "eidolon" project.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the LICENSE is distributed on an "AS IS" BASIS,
