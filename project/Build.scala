@@ -23,7 +23,7 @@ object Build extends BaseBuild {
     import Dependencies._
 
     lazy val commonSettings = Seq(
-        organization := "so.seer",
+        organization := "io.symcore",
         version := "0.1.0-SNAPSHOT",
         scalaVersion := "2.11.6",
         resolvers ++= Dependencies.repositories
@@ -38,4 +38,7 @@ object Build extends BaseBuild {
     lazy val container = (project in file("components/eidolon-container"))
         .settings(commonSettings: _*)
         .settings(name := "component.container")
+        .settings(libraryDependencies ++=
+            test(scalaTest)
+        )
 }

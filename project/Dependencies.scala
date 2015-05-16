@@ -24,11 +24,12 @@ object Dependencies {
     )
 
     def compile(deps: ModuleID*): Seq[ModuleID] = deps.map(_ % "compile")
-    def provided(deps: ModuleID*): Seq[ModuleID] = deps.map(_ % "provided")
-    def test(deps: ModuleID*): Seq[ModuleID] = deps.map(_ % "test")
-    def runtime(deps: ModuleID*): Seq[ModuleID] = deps.map(_ % "runtime")
     def container(deps: ModuleID*): Seq[ModuleID] = deps.map(_ % "container")
+    def provided(deps: ModuleID*): Seq[ModuleID] = deps.map(_ % "provided")
+    def runtime(deps: ModuleID*): Seq[ModuleID] = deps.map(_ % "runtime")
+    def test(deps: ModuleID*): Seq[ModuleID] = deps.map(_ % "test")
 
     val akkaActor = "com.typesafe.akka" %% "akka-actor" % "2.3.11"
-    var sprayCan  = "io.spray"          %% "spray-can"  % "1.3.3"
+    val scalaTest = "org.scalatest"     %% "scalatest"  % "2.2.4"
+    val sprayCan  = "io.spray"          %% "spray-can"  % "1.3.3"
 }
