@@ -9,20 +9,13 @@
  * file that was distributed with this source code.
  */
 
-import io.symcore.eidolon.component.router.analysis.Lexer
+package io.symcore.eidolon.component.router
 
 /**
- * Main
+ * Router
  *
  * @author Elliot Wright <elliot@elliotwright.co>
  */
-object Main {
-    def main(args: Array[String]) {
-        println("Initiating lexical analysis...")
+class Router {
 
-        val lexer = new Lexer();
-        val stream = lexer.tokenise("/foo/bar/baz-qux");
-
-        println("Lexical analysis completed.")
-    }
 }
