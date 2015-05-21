@@ -41,4 +41,11 @@ object Build extends BaseBuild {
         .settings(libraryDependencies ++=
             test(scalaTest)
         )
+
+    lazy val router = (project in file("components/eidolon-router"))
+        .settings(commonSettings: _*)
+        .settings(name := "component.router")
+        .settings(libraryDependencies ++=
+            test(scalaTest)
+        )
 }
