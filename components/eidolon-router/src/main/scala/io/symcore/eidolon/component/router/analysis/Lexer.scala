@@ -33,13 +33,12 @@ class Lexer {
 
         @tailrec
         def impl(path: String): Unit = {
-            path.isEmpty match {
-                case true =>
-                case false =>
-                    val token = getToken(path)
-                    stream = stream :+ token
-                    impl(path.replaceFirst(token.value, ""))
-            }
+            if (path.isEmpty) return
+
+            val token = getToken(path)
+
+            stream = stream :+ token
+            impl(path.replaceFirst(token.value, ""))
         }
 
         impl(path)
@@ -57,8 +56,8 @@ class Lexer {
             case RegexHyphen(c) => new T_HYPHEN(c)
             case RegexPathSeperator(c) => new T_PATH_SEPERATOR(c)
             case RegexString(c) => new T_STRING(c)
-            case RegexStringAny(c) => new T_STRING_ANY(c)
             case RegexUnderscore(c) => new T_UNDERSCORE(c)
+            case RegexVariable(c) => new T_VARIABLE(c)
             case _ =>
                 throw new RuntimeException(
                     String.format("Invalid route character found in path \"%s\".", path)
@@ -76,8 +75,8 @@ object Lexer {
     final val RegexHyphen = """^([-])""".r.unanchored
     final val RegexPathSeperator = """^(/)""".r.unanchored
     final val RegexString = """^([A-z]*)""".r.unanchored
-    final val RegexStringAny = """^(:[A-z]*)""".r.unanchored
     final val RegexUnderscore = """^([_])""".r.unanchored
+    final val RegexVariable = """^(:[A-z]*)""".r.unanchored
 
     trait Token {
         val value: String
@@ -86,6 +85,6 @@ object Lexer {
     case class T_HYPHEN(value: String) extends Token
     case class T_PATH_SEPERATOR(value: String) extends Token
     case class T_STRING(value: String) extends Token
-    case class T_STRING_ANY(value: String) extends Token
+    case class T_VARIABLE(value: String) extends Token
     case class T_UNDERSCORE(value: String) extends Token
 }
