@@ -72,11 +72,11 @@ class Lexer {
  * @author Elliot Wright <elliot@elliotwright.co>
  */
 object Lexer {
-    final val RegexHyphen = """^([-])""".r.unanchored
+    final val RegexHyphen = """^(-)""".r.unanchored
     final val RegexPathSeperator = """^(/)""".r.unanchored
-    final val RegexString = """^([A-z]*)""".r.unanchored
-    final val RegexUnderscore = """^([_])""".r.unanchored
-    final val RegexVariable = """^(:[A-z]*)""".r.unanchored
+    final val RegexString = """^([A-Za-z0-9]+)""".r.unanchored
+    final val RegexUnderscore = """^(_)""".r.unanchored
+    final val RegexVariable = """^(:[A-Za-z0-9]+)""".r.unanchored
 
     trait Token {
         val value: String
