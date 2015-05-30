@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-package io.symcore.eidolon.component.router.analysis
+package io.symcore.eidolon.component.router.compilation
 
 import scala.annotation.tailrec
 
