@@ -51,7 +51,7 @@ class Lexer {
      * @param path Path to test against
      * @return Token, with it's assigned value
      */
-    def getToken(path: String): Token = {
+    private def getToken(path: String): Token = {
         path match {
             case RegexHyphen(c) => new T_HYPHEN(c)
             case RegexPathSeperator(c) => new T_PATH_SEPERATOR(c)
