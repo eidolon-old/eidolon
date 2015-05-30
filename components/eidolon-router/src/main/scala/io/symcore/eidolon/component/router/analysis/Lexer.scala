@@ -38,7 +38,7 @@ class Lexer {
             val token = getToken(path)
 
             stream = stream :+ token
-            impl(path.replaceFirst(token.value, ""))
+            impl(path.replaceFirst(token.lexeme, ""))
         }
 
         impl(path)
@@ -79,12 +79,12 @@ object Lexer {
     final val RegexVariable = """^(:[A-Za-z0-9]+)""".r.unanchored
 
     trait Token {
-        val value: String
+        val lexeme: String
     }
 
-    case class T_HYPHEN(value: String) extends Token
-    case class T_PATH_SEPERATOR(value: String) extends Token
-    case class T_STRING(value: String) extends Token
-    case class T_VARIABLE(value: String) extends Token
-    case class T_UNDERSCORE(value: String) extends Token
+    case class T_HYPHEN(lexeme: String) extends Token
+    case class T_PATH_SEPERATOR(lexeme: String) extends Token
+    case class T_STRING(lexeme: String) extends Token
+    case class T_VARIABLE(lexeme: String) extends Token
+    case class T_UNDERSCORE(lexeme: String) extends Token
 }
