@@ -9,9 +9,8 @@
  * file that was distributed with this source code.
  */
 
-package io.symcore.eidolon.component.router
+package io.symcore.eidolon.component.router.analysis
 
-import io.symcore.eidolon.component.router.analysis.Lexer
 import io.symcore.eidolon.component.router.analysis.Lexer._
 import org.scalatest.{BeforeAndAfter, FunSpec}
 
