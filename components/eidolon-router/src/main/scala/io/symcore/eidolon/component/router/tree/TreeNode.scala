@@ -18,19 +18,13 @@ import io.symcore.eidolon.component.router.compilation.Lexer.Token
  *
  * @author Elliot Wright <elliot@elliotwright.co>
  */
-trait TreeNode {
-    private var _children: Map[String, ChildTreeNode] = Map[String, ChildTreeNode]()
+class TreeNode(private val token: Token) {
+    private var _children = Map[String, TreeNode]()
 
     def children = _children
 
-    def addChild(node: ChildTreeNode) = {
-        this._children = this._children + (node.token.toString -> node)
-    }
-
-    def removeChild(node: ChildTreeNode) = {
-        this._children = this._children - node.token.toString
-    }
+    def addChild(node: TreeNode) = this._children = this._children + (node.token.toString -> node)
+    def getChild(node: TreeNode) = this.children.get(node.token.toString)
+    def hasChild(node: TreeNode) = this.children.get(node.token.toString).isDefined
+    def removeChild(node: TreeNode) = this._children = this._children - node.token.toString
 }
-
-case class RootTreeNode() extends TreeNode
-case class ChildTreeNode(token: Token) extends TreeNode

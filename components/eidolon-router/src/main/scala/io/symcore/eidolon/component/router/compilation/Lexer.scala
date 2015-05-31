@@ -87,4 +87,5 @@ object Lexer {
     case class T_STRING(lexeme: String) extends Token
     case class T_VARIABLE(lexeme: String) extends Token
     case class T_UNDERSCORE(lexeme: String) extends Token
+    case class T_ROOT(lexeme: String = "") extends Token
 }
