@@ -12,6 +12,7 @@
 package io.symcore.eidolon.component.router.compilation
 
 import io.symcore.eidolon.component.router.compilation.Lexer._
+import io.symcore.eidolon.component.router.tree.{TokenTree, TokenForest}
 import org.scalatest.{BeforeAndAfter, FunSpec}
 
 /**
