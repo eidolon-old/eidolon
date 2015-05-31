@@ -11,10 +11,31 @@
 
 package io.symcore.eidolon.component.router.compilation
 
+import io.symcore.eidolon.component.router.compilation.Lexer.Token
+import io.symcore.eidolon.component.router.tree.{Tree, TokenForest, TokenTree}
+
+import scala.collection.immutable.Queue
+
 /**
  * Parser
  *
  * @author Elliot Wright <elliot@elliotwright.co>
  */
 class Parser {
+    def parse(forest: TokenForest, tokens: Queue[Token]): Unit = {
+        var stream = tokens
+        var currentNode: Tree = forest
+
+        while (stream.nonEmpty) {
+            val (token, remaining) = stream.dequeue
+
+            if (!currentNode.hasChild(token)) {
+                currentNode.addChild(new TokenTree(token))
+            }
+
+            currentNode = currentNode.getChild(token)
+
+            stream = remaining
+        }
+    }
 }

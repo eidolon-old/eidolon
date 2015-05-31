@@ -16,4 +16,4 @@ package io.symcore.eidolon.component.router.tree
  *
  * @author Elliot Wright <elliot@elliotwright.co>
  */
-class TokenForest extends Children
+class TokenForest extends Tree

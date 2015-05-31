@@ -18,4 +18,4 @@ import io.symcore.eidolon.component.router.compilation.Lexer.Token
  *
  * @author Elliot Wright <elliot@elliotwright.co>
  */
-class TokenTree(val token: Token) extends Children
+class TokenTree(val token: Token) extends Tree

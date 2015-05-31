@@ -12,8 +12,9 @@
 package io.symcore.eidolon.component.router.compilation
 
 import io.symcore.eidolon.component.router.compilation.Lexer._
-import io.symcore.eidolon.component.router.tree.{TokenTree, TokenForest}
 import org.scalatest.{BeforeAndAfter, FunSpec}
+
+import scala.collection.immutable.Queue
 
 /**
  * LexerSpec
@@ -28,10 +29,10 @@ class LexerSpec extends FunSpec with BeforeAndAfter {
     }
 
     describe("tokenise()") {
-        it("should return a `List` of `Token`s") {
+        it("should return a `Queue` of `Token`s") {
             val tokens = this.lexer.tokenise("")
 
-            assert(tokens.isInstanceOf[List[Token]])
+            assert(tokens.isInstanceOf[Queue[Token]])
         }
 
         it("should tokenise '-' to a `T_HYPHEN` `Token`") {

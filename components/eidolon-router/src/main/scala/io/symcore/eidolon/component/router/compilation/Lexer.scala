@@ -12,6 +12,7 @@
 package io.symcore.eidolon.component.router.compilation
 
 import scala.annotation.tailrec
+import scala.collection.immutable.Queue
 
 /**
  * Lexer
@@ -28,8 +29,8 @@ class Lexer {
      * @param path Path to analyse
      * @return Token stream
      */
-    def tokenise(path: String): List[Token] = {
-        var stream = List[Token]()
+    def tokenise(path: String): Queue[Token] = {
+        var stream = Queue[Token]()
 
         @tailrec
         def impl(path: String): Unit = {
@@ -37,7 +38,7 @@ class Lexer {
 
             val token = getToken(path)
 
-            stream = stream :+ token
+            stream = stream.enqueue(token)
             impl(path.replaceFirst(token.lexeme, ""))
         }
 

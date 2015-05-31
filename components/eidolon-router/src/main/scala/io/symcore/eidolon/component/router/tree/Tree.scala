@@ -11,19 +11,24 @@
 
 package io.symcore.eidolon.component.router.tree
 
+import io.symcore.eidolon.component.router.compilation.Lexer.Token
+
 /**
- * Children
+ * Tree
  *
  * @author Elliot Wright <elliot@elliotwright.co>
  */
-private[tree] trait Children {
+private[router] trait Tree {
     private var _children = Map[String, TokenTree]()
 
     def children = _children
 
     def addChild(node: TokenTree) = this._children = this._children + (node.token.toString -> node)
-    def getChild(node: TokenTree) = this.children.get(node.token.toString)
+    def getChild(node: TokenTree) = this.children(node.token.toString)
+    def getChild(token: Token) = this.children(token.toString)
     def hasChild(node: TokenTree) = this.children.get(node.token.toString).isDefined
+    def hasChild(token: Token) = this.children.get(token.toString).isDefined
     def hasChildren = this.children.nonEmpty
     def removeChild(node: TokenTree) = this._children = this._children - node.token.toString
+    def removeCHild(token: Token) = this._children = this._children - token.toString
 }
