@@ -12,6 +12,7 @@
 package io.symcore.eidolon.component.router.compilation
 
 import io.symcore.eidolon.component.router.compilation.Lexer._
+import io.symcore.eidolon.component.router.tree.{ChildTreeNode, RootTreeNode}
 import org.scalatest.{BeforeAndAfter, FunSpec}
 
 /**
@@ -29,6 +30,15 @@ class LexerSpec extends FunSpec with BeforeAndAfter {
     describe("tokenise()") {
         it("should return a `List` of `Token`s") {
             val tokens = this.lexer.tokenise("")
+            val tree = new RootTreeNode()
+            val node0 = new ChildTreeNode(this.lexer.tokenise("/").headOption.get)
+            val node00 = new ChildTreeNode(this.lexer.tokenise("foo").headOption.get)
+            val node01 = new ChildTreeNode(this.lexer.tokenise("bar").headOption.get)
+
+            node0.addChild(node00)
+            node0.addChild(node01)
+
+            tree.addChild(node0)
 
             assert(tokens.isInstanceOf[List[Token]])
         }
