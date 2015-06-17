@@ -29,7 +29,11 @@ object Dependencies {
     def runtime(deps: ModuleID*): Seq[ModuleID] = deps.map(_ % "runtime")
     def test(deps: ModuleID*): Seq[ModuleID] = deps.map(_ % "test")
 
-    val akkaActor = "com.typesafe.akka" %% "akka-actor" % "2.3.11"
-    val scalaTest = "org.scalatest"     %% "scalatest"  % "2.2.4"
-    val sprayCan  = "io.spray"          %% "spray-can"  % "1.3.3"
+    val akkaVersion = "2.3.11"
+    val sprayVersion = "1.3.3"
+
+    val akkaActor  = "com.typesafe.akka"      %% "akka-actor"  % akkaVersion
+    val scalaAsync = "org.scala-lang.modules" %% "scala-async" % "0.9.3"
+    val scalaTest  = "org.scalatest"          %% "scalatest"   % "2.2.4"
+    val sprayCan   = "io.spray"               %% "spray-can"   % sprayVersion
 }

@@ -19,7 +19,6 @@ import spray.revolver.RevolverPlugin._
  * @author Elliot Wright <elliot@elliotwright.co>
  */
 object Build extends BaseBuild {
-
     import Dependencies._
 
     lazy val commonSettings = Seq(
@@ -46,6 +45,7 @@ object Build extends BaseBuild {
         .settings(commonSettings: _*)
         .settings(name := "component.router")
         .settings(libraryDependencies ++=
+            compile(akkaActor, scalaAsync) ++
             test(scalaTest)
         )
 }
