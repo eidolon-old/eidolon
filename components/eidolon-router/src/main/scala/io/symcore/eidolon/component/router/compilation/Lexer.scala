@@ -20,7 +20,6 @@ import scala.collection.immutable.Queue
  * @author Elliot Wright <elliot@elliotwright.co>
  */
 class Lexer {
-
     import Lexer._
 
     /**

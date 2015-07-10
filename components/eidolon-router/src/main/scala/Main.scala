@@ -12,7 +12,7 @@
 import io.symcore.eidolon.component.router.compilation.{Lexer, Parser}
 import io.symcore.eidolon.component.router.tree.TokenForest
 
-import scala.async.Async.{async, await}
+import scala.async.Async._
 import scala.concurrent.{Await, Future}
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration._
@@ -29,28 +29,43 @@ object Main {
     private val parser = new Parser
     private var routes = Queue[String]()
 
-    private var slow1: Future[String] = _
-    private var slow2: Future[String] = _
-
     private def doSomething(delay: Int): Future[String] = Future {
         Thread.sleep(delay)
         "This was delayed by... " + delay + "ms"
     }
 
-    private def doSomeThings(): (String, String) = {
-        val timeout = 11 seconds
+    private def doSomeThings(): Future[List[String]] = {
+        async {
+            List(
+                await { doSomething(1500) },
+                await { doSomething(2000) },
+                await { doSomething(1000) },
+                await { doSomething(1000) },
+                await { doSomething(1000) },
+                await { doSomething(1000) },
+                await { doSomething(1000) },
+                await { doSomething(1000) },
+                await { doSomething(1000) },
+                await { doSomething(1000) },
+                await { doSomething(1000) }
+            )
+        }
 
-        slow1 = doSomething(10000)
-        slow2 = doSomething(7000)
-
-        (Await.result(slow1, timeout), Await.result(slow2, timeout))
+        // Maybe make 2 functions, one which adds things to a queue, the other which adds something
+        // to the queue, and then processes the whole thing, so, we add a bunch of futures, then
+        // the last one is the one that calls Await on them all.
     }
 
     def main(args: Array[String]) {
-        val (result1, result2) = doSomeThings()
+        val things = Await.result(doSomeThings(), 10 seconds)
 
-        println(result1)
-        println(result2)
+        try {
+            things foreach {
+                println(_)
+            }
+        } catch {
+            case e: Exception => println(e.getMessage)
+        }
 
         //        this.routes = this.routes.enqueue("/foo/bar")
         //        this.routes = this.routes.enqueue("/foo/:one")
